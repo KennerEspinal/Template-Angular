@@ -20,6 +20,11 @@ _Para poder inicializar el sistema se requiere lo siguiente :_
 git clone https://github.com/KennerEspinal/Template-Angular.git
 ```
 
+### Automatización de instalación 🔧
+```
+./run_angular.sh
+```
+
 ## Configuración de los Dockerfiles
 -	Dockerfile.prod
 ```sh
