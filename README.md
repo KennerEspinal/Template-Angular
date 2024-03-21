@@ -11,7 +11,7 @@ _Para poder inicializar el sistema se requiere lo siguiente :_
 ```
 1. Git.
 2. Docker & Docker Compose.
-3. Angular + TailwindCSS = Flowbite.
+3. Angular + TailwindCSS + Flowbite.
 4. IntelliJ (Editor de Codigo).
 ```
 
