@@ -20,7 +20,7 @@ _Para poder inicializar el sistema se requiere lo siguiente :_
 git clone https://github.com/KennerEspinal/Template-Angular.git
 ```
 
-## Configuring the Dockerfile
+## Configuración de los Dockerfiles
 -	Dockerfile.prod
 ```sh
 # Usamos la imagen oficial de Node.js como base
@@ -86,7 +86,7 @@ CMD ["pnpm", "start"]
 docker compose up
 ```
 
---The app be available on http://localhost:4200/ and http://localhost/
+--La aplicación estará disponible en http://localhost:4200/ y http://localhost/ asegurate que ambos puertos estén disponibles
 
 
 ## Autor ✒️
