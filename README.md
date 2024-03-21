@@ -85,8 +85,8 @@ CMD ["pnpm", "start"]
 
 
 ```
-## Distribution using Docker
--1. Build services with Docker:
+## Distribución usando Docker
+-1. Construir los Servicios con Docker:
 ```sh
 docker compose up
 ```
