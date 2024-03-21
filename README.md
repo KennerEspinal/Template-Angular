@@ -1,27 +1,97 @@
-# Template
+# Template Angular Creado Por KennerEspinalDev
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.2.
+_Sistema desarrollado por KennerDev_
 
-## Development server
+## Comenzando 🚀
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Pre-requisitos 📋
 
-## Code scaffolding
+_Para poder inicializar el sistema se requiere lo siguiente :_
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+1. Git.
+2. Docker & Docker Compose.
+3. Angular + TailwindCSS = Flowbite.
+4. IntelliJ (Editor de Codigo).
+```
 
-## Build
+### Clonar el Repositorio 🔧
+```
+git clone https://github.com/KennerEspinal/Template-Angular.git
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Configuring the Dockerfile
+-	Dockerfile.prod
+```sh
+# Usamos la imagen oficial de Node.js como base
+FROM node:20-alpine AS builder
 
-## Running unit tests
+# Establecemos el directorio de trabajo dentro del contenedor
+WORKDIR /app
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+# Copiamos el archivo package.json y package-lock.json (o yarn.lock si estás usando Yarn)
+COPY package*.json ./
 
-## Running end-to-end tests
+# Instalamos las dependencias
+RUN npm install
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+# Copiamos el resto de los archivos de la aplicación
+COPY . .
 
-## Further help
+# Construimos la aplicación Angular
+RUN npm run build --prod
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+# Configuramos una imagen ligera de Nginx para servir la aplicación construida
+FROM nginx:alpine AS production
+
+# Copiamos los archivos de la aplicación Angular construida desde la etapa anterior
+COPY --from=builder /app/dist/template/* /usr/share/nginx/html/
+
+# Exponemos el puerto 80 para que la aplicación Angular sea accesible
+EXPOSE 80
+
+# Comando de inicio para Nginx
+CMD ["nginx", "-g", "daemon off;"]
+
+```
+
+-	Dockerfile.dev
+```sh
+# Fase de construcción
+FROM node:20-alpine AS builder
+
+# Instalar pnpm
+RUN npm install -g pnpm
+
+# Establecer el directorio de trabajo en la aplicación
+WORKDIR /app
+
+# Copiar el contenido actual (excepto lo que esté en el archivo .dockerignore)
+COPY . .
+
+# Instalación de las dependencias de node con pnpm
+RUN pnpm install
+
+# Expone el puerto para el desarrollo (puerto de la aplicación Angular)
+EXPOSE 4200
+
+# Comando para iniciar la aplicación en modo de desarrollo
+CMD ["pnpm", "start"]
+
+
+```
+## Distribution using Docker
+-1. Build services with Docker:
+```sh
+docker compose up
+```
+
+--The app be available on http://localhost:4200/ and http://localhost/
+
+
+## Autor ✒️
+
+* **Kenner Espinal**
+
+## Expresiones de Gratitud 🎁
+
